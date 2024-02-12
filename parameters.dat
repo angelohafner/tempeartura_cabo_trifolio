@@ -1,0 +1,71 @@
+// Millimetres
+mm 			= 	1e-3;
+// Mesh Size General
+msg 		=	1*mm;
+
+rInd 		 =  9.05*mm;
+rDiel1 		 = 17.80*mm;
+rBlind 		 = 18.05*mm;
+rDiel2 		 = 19.964*mm;
+rNominalVeia = 19.983*mm;
+
+rIntDiel3 = 43.058*mm;
+rExtDiel3 = 48.058*mm;
+rArmor    = 59.058*mm;
+rExtDiel4 = 65.058*mm;
+
+// Centro do cabo
+c_x = 0;
+c_y = 0;
+
+// Centro dos círculos inferior esquerdo, inferior direito e superior central
+ccie_x 		 = -rNominalVeia; 
+ccie_y 		 = -rNominalVeia / Sqrt[3];
+ccid_x 		 =  rNominalVeia; 
+ccid_y 		 = -rNominalVeia / Sqrt[3];
+ccsc_x 		 =  c_x; 
+ccsc_y 		 =  rNominalVeia * 2 / Sqrt[3];
+
+rShellInt    = rDiel1 * 15;
+rShellExt    = rShellInt    * 1.5;
+
+
+
+
+LDIEL1IE=10002;
+LINDIE=10000;
+LBLINDIE=10001;
+
+LDIEL1ID=10012;
+LINDID=10010;
+LBLINDID=10011;
+
+LDIEL1SC=10022;
+LINDSC=10020;
+LBLINDSC=10021;
+
+LARMOR=10030;
+
+LFRONTEIRA = 10040;
+
+SINDIE=20000;
+SDIEL1IE=20001;
+SBLINDIE=20002;
+SDIEL2IE=20003;
+
+SINDID=20010;
+SDIEL1ID=20011;
+SBLINDID=20012;
+SDIEL2ID=20013;
+
+SINDSC=20020;
+SDIEL1SC=20021;
+SBLINDSC=20022;
+SDIEL2SC=20023;
+
+SFILLER=20050;
+SDIELINTARM=20051;
+SARMOR=20052;
+SDIELEXTARM=20053;
+
+SFRONTEIRA=20040;
