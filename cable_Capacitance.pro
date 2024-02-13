@@ -1,4 +1,5 @@
 Include "parameters.dat";
+Include "physics.geo";
 
 Group {
 	// L denotes Lines, S Surfaces # is can be used instead of Region[]
@@ -71,15 +72,15 @@ Group {
 }
 
 Function{
-	eps0 			 = 	8.854187818e-12;
-	epsr[Sind]		 =	1.0;
-	epsr[Sdiel1]	 =	3.62672705842; 
-	epsr[Sblind]	 =	1.0;
-	epsr[Sdiel2]	 =	2.3;   
-	epsr[Sfiller]	 =	1.0;
-	epsr[Sdiel3]	 =	2.3;  
-	epsr[Sarmor]	 =	1.0;
-	epsr[Sfronteira] = 1.0;    
+	//eps0 			 = 	1;
+	epsr[Sind]		 =	400.0;
+	epsr[Sdiel1]	 =	0.4; 
+	epsr[Sblind]	 =	400.0;
+	epsr[Sdiel2]	 =	0.4;   
+	epsr[Sfiller]	 =	0.4;
+	epsr[Sdiel3]	 =	0.4;  
+	epsr[Sarmor]	 =	50.0;
+	epsr[Sfronteira] =  0.025;    
 }
 
 Jacobian {
@@ -122,17 +123,17 @@ Constraint{
 	{ Name GlobalElectricPotential ;
 		Case{
 			//Boundary condition using fixed Voltages
-			{ Region Lindie;  	Value  100. ;  }
+			//{ Region Lindie;  	Value  100. ;  }
 			//{ Region Lblindie; 	Value  0. ;  }
 			
-			{ Region Lindid;  	Value  100. ;  }
+			//{ Region Lindid;  	Value  100. ;  }
 			//{ Region Lblindid; 	Value  0. ;  }
 			
-			{ Region Lindsc;  	Value  100. ;  }
+			//{ Region Lindsc;  	Value  100. ;  }
 			//{ Region Lblindsc; 	Value  0. ;  }			
 			
 			//{ Region Larmor; 	Value  0. ;  }
-			{ Region Lfronteira;  	Value  0. ;  }
+			{ Region Lfronteira;  	Value  0.0 ;  }
 			
 		}
 	}
@@ -142,6 +143,12 @@ Constraint{
 			//Boundary Condition defining the charge of a grouped domain
 			//For each grouped domain, either a charge or a potential 
 			//needs to be specified
+			{ Region Lindie;  	Value  q_core ;  }
+			{ Region Lindid;  	Value  q_core ;  }
+			{ Region Lindsc;  	Value  q_core ;  }
+			{ Region Lblindie; 	Value  q_sheath ;  }
+			{ Region Lblindid; 	Value  q_sheath ;  }
+			{ Region Lblindsc; 	Value  q_sheath ;  }
 		}
 	}
 }
@@ -191,7 +198,7 @@ Formulation{
 		Equation {
 			Galerkin { [ epsr[]*Dof{Grad v} , {Grad v} ] ; In Vol; Jacobian Vol ; Integration Int ; }
 			// div epsr[] grad v=0
-			GlobalTerm { [ -Dof{Q}/eps0 , {V} ] ; In Grouped ; }
+			GlobalTerm { [ -Dof{Q}/1 , {V} ] ; In Grouped ; }
 		}
 	}
 }
