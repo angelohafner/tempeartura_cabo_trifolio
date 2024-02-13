@@ -1,6 +1,6 @@
 //View.IntervalsType = 1;
 //View.NbIso = 32;
-
+Include "physics.geo";
 
 Include "parameters.dat";
 
@@ -78,7 +78,7 @@ Physical Surface(SARMOR) = {4000001};
 // Fronteira Longínqua
 cx = c_x;
 cy = c_y;
-r  = 5*rArmor;
+r  = 10*rArmor;
 msg = 20 * msg;
 Point(5000001)={cx     , cy     , 0 , msg};
 Point(5000002)={cx + r , cy     , 0 , msg};
